@@ -9,17 +9,22 @@ class SliderExample extends StatefulWidget {
 
 class _SliderExampleState extends State<SliderExample> {
   double _counter = 0;
+  final double _division = 10;
 
   void _incrementCounter() {
     setState(() {
-      _counter++;
+      if(_counter < _division){
+        _counter++;
+      }
     });
   }
 
 
   void _decrementCounter() {
     setState(() {
-      _counter--;
+      if(_counter > 0){
+        _counter--;
+      }
     });
   }
 
@@ -37,8 +42,8 @@ class _SliderExampleState extends State<SliderExample> {
             ),
 
           Slider(
-            max: 10,
-            divisions: 10,
+            max: _division,
+            divisions: _division.toInt(),
             value: _counter,
             label: _counter.round().toInt().toString(),
             onChanged: (double value) {
@@ -47,6 +52,8 @@ class _SliderExampleState extends State<SliderExample> {
               });
             },
           ),
+          BackButton(
+            onPressed: _decrementCounter)
         ],
       ),
       floatingActionButton: FloatingActionButton(
